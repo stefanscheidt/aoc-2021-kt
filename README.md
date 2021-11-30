@@ -5,7 +5,7 @@ See <https://adventofcode.com/2015>, <https://kotlinlang.org/>.
 ## Getting Input
 
 Grab your advent of code session cookie from the browser (the internet will help you)
-and store it in an env var `AOC_SESSION`. Then `cd` into `./input` and `./get_input <number of the day>`.
+and store it in an env var `AOC_SESSION`. Then `cd` into `./input` and run `./get_input <number of the day>`.
 
 ## Code Formatting
 
