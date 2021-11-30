@@ -1,6 +1,6 @@
-# Advent of Code 2015, using Kotlin
+# Advent of Code 2021, using Kotlin
 
-See <https://adventofcode.com/2015>, <https://kotlinlang.org/>.
+See <https://adventofcode.com/2021>, <https://kotlinlang.org/>.
 
 ## Getting Input
 
