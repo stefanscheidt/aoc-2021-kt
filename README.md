@@ -2,6 +2,8 @@
 
 See <https://adventofcode.com/2021>, <https://kotlinlang.org/>.
 
+See also ["the official GitHub template"](https://github.com/kotlin-hands-on/advent-of-code-kotlin-template) by JetBrains.
+
 ## Getting Input
 
 Grab your advent of code session cookie from the browser (the internet will help you)
