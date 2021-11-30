@@ -9,11 +9,11 @@ and store it in an env var `AOC_SESSION`. Then `cd` into `./input` and run `./ge
 
 ## Code Formatting
 
-Code format is check by [ktlint](https://ktlint.github.io/)
+Code format is checked by [ktlint](https://ktlint.github.io/)
 via the Gradle plugin [Ktlint Gradle](https://github.com/jlleitschuh/ktlint-gradle)
 
-Format the code using `./gradlw ktlintFormat`.
+Format the code using `./gradlew ktlintFormat`.
 
 Adjust IDEA code style settings via `./gradlew ktlintApplyToIdea` and restart IDEA.
 
-Add a Git pre-commit hook via `./gradlew addKtlintCheckGitPreCommitHook`.
+Add a Git pre-commit hook checking the format via `./gradlew addKtlintCheckGitPreCommitHook`.
