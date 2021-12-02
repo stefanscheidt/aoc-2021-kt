@@ -22,7 +22,7 @@ fun String.parseMove(): Move {
     }
 }
 
-data class Position(val horizontal: Int, val depth: Int, val aim: Int = 0)
+data class Position(val horizontal: Int, val depth: Int, val aim: Int)
 
 fun applyMove1(pos: Position, move: Move): Position =
     when (move) {
@@ -38,15 +38,14 @@ fun applyMove2(pos: Position, move: Move): Position =
         is Down -> pos.copy(aim = pos.aim + move.units)
     }
 
-fun solvePuzzle1(input: Sequence<String>): Long {
-    val finalPosition = input.map(String::parseMove)
-        .fold(Position(0, 0), ::applyMove1)
-    return (finalPosition.horizontal * finalPosition.depth).toLong()
-}
+fun solvePuzzle1(input: Sequence<String>): Long =
+    solve(input, ::applyMove1)
 
-fun solvePuzzle2(input: Sequence<String>): Long {
-    val finalPosition = input.map(String::parseMove)
-        .fold(Position(0, 0, 0), ::applyMove2)
+fun solvePuzzle2(input: Sequence<String>): Long =
+    solve(input, ::applyMove2)
+
+private fun solve(input: Sequence<String>, f: (Position, Move) -> Position): Long {
+    val finalPosition = input.map(String::parseMove).fold(Position(0, 0, 0), f)
     return (finalPosition.horizontal * finalPosition.depth).toLong()
 }
 
