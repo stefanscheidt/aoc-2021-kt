@@ -30,7 +30,7 @@ class Day01Tests {
 
     @Test
     internal fun `solve first puzzle`() {
-        solvePuzzle(1) { solveFirstPuzzle(it) } shouldBe 1529L
+        solvePuzzle(1, ::solveFirstPuzzle) shouldBe 1529L
     }
 
     @Test
