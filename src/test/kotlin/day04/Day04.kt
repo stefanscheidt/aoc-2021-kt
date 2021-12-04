@@ -56,12 +56,16 @@ fun bingoCardOf(strings: List<String>): BingoCard {
     return BingoCard(card)
 }
 
+private fun numbers(input: List<String>): List<Int> =
+    input.first().split(",").map(String::toInt)
+
+private fun cards(input: List<String>): List<BingoCard> =
+    input.drop(1).chunked(6).map(::bingoCardOf)
+
 fun solvePuzzle1(input: Sequence<String>): Long {
-    val lines = input.toList()
-    val ns = lines.first().split(",").map(String::toInt)
-    var cards = lines.drop(1)
-        .chunked(6)
-        .map(::bingoCardOf)
+    val inputList = input.toList()
+    val ns = numbers(inputList)
+    var cards = cards(inputList)
 
     ns.forEach { n ->
         cards = cards.map { it.mark(n) }
@@ -70,4 +74,20 @@ fun solvePuzzle1(input: Sequence<String>): Long {
     }
 
     return 0L
+}
+
+fun solvePuzzle2(input: Sequence<String>): Long {
+    val inputList = input.toList()
+    val ns = numbers(inputList)
+    var cards = cards(inputList)
+
+    val winners = mutableListOf<Pair<BingoCard, Int>>()
+    ns.forEach { n ->
+        val winnersAndLosers = cards.map { it.mark(n) }.partition(BingoCard::solved)
+        winners.addAll(winnersAndLosers.first.map { it to n })
+        cards = winnersAndLosers.second
+    }
+
+    val lastWinner = winners.last()
+    return lastWinner.first.score(lastWinner.second).toLong()
 }

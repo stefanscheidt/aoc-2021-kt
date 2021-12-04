@@ -102,6 +102,18 @@ class Day04Tests {
         solvePuzzle(4, ::solvePuzzle1) shouldBe 49686L
     }
 
+    @Test
+    fun `solve second puzzle with sample`() {
+        val input = sample.lineSequence()
+
+        solvePuzzle2(input) shouldBe 1924L
+    }
+
+    @Test
+    fun `solve second puzzle`() {
+        solvePuzzle(4, ::solvePuzzle2) shouldBe 26878L
+    }
+
     private val sample = """
         7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,3,26,1
         
