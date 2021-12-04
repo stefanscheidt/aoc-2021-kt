@@ -15,8 +15,8 @@ fun solvePuzzle1(input: Sequence<String>): Long {
     val words = input.toWords()
     val zeros = List(words.size) { 0 }
     val counts = words.fold(zeros) { acc, word -> acc.zip(word).map(::sum) }
-    val gamma = counts.rate { it > words.size / 2 }
-    val epsilon = counts.rate { !(it > words.size / 2) }
+    val gamma = counts.rate { it >= words.size / 2.0 }
+    val epsilon = counts.rate { it < words.size / 2.0 }
     return (gamma * epsilon).toLong()
 }
 
