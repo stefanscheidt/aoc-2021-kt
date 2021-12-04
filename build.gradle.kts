@@ -27,7 +27,7 @@ repositories {
 }
 
 dependencies {
-    val junitVersion = "5.8.1"
+    val junitVersion = "5.8.2"
 
     @Suppress("GradlePackageUpdate")
     implementation("commons-codec:commons-codec:1.15")
