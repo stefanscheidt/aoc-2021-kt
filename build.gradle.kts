@@ -29,12 +29,11 @@ repositories {
 dependencies {
     val junitVersion = "5.8.2"
 
-    @Suppress("GradlePackageUpdate")
-    implementation("commons-codec:commons-codec:1.15")
-
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-    testImplementation("io.kotest:kotest-assertions-core:4.6.3")
+    testImplementation("io.kotest:kotest-assertions-core:5.0.1")
+
+    testImplementation(kotlin("script-runtime"))
 }
