@@ -2,28 +2,25 @@ package day06
 
 import utils.solvePuzzle
 
-data class Fish(private var timer: Int = 8) {
-    val time: Int
-        get() = timer
+typealias Evolution = Map<Int, Long>
 
-    fun tick(): List<Fish> {
-        timer -= 1
-        if (timer < 0) {
-            timer = 6
-            return listOf(Fish())
-        }
-        return emptyList()
-    }
+fun evolutionOf(seed: List<Int>): Evolution {
+    val evolution = mutableMapOf<Int, Long>()
+    (0..8).forEach { timer -> evolution[timer] = seed.count { it == timer }.toLong() }
+    return evolution
 }
 
-private fun solve(input: Sequence<String>, times: Int): Long {
-    val state = input.first().split(",").map(String::toInt).map(::Fish).toMutableList()
-    repeat(times) {
-        val newFish = mutableListOf<Fish>()
-        state.forEach { fish -> newFish.addAll(fish.tick()) }
-        state.addAll(newFish)
-    }
-    return state.size.toLong()
+fun Evolution.tick(): Evolution {
+    val next = mutableMapOf<Int, Long>()
+    forEach { (timer, _) -> next[timer] = if (timer == 6) this[7]!! + this[0]!! else this[(timer + 1) % 9]!! }
+    return next
+}
+
+fun solve(input: Sequence<String>, generations: Int): Long {
+    val timers = input.first().split(",").map(String::toInt)
+    var evolution = evolutionOf(timers)
+    repeat(generations) { evolution = evolution.tick() }
+    return evolution.entries.sumOf { it.value }
 }
 
 fun solvePuzzle1(input: Sequence<String>): Long =
@@ -34,5 +31,5 @@ fun solvePuzzle2(input: Sequence<String>): Long =
 
 fun main() {
     println("Answer 1: ${solvePuzzle(6, ::solvePuzzle1)}")
-    // println("Answer 2: ${solvePuzzle(6, ::solvePuzzle2)}")
+    println("Answer 2: ${solvePuzzle(6, ::solvePuzzle2)}")
 }
