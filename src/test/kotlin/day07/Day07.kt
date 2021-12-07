@@ -4,11 +4,12 @@ import utils.solvePuzzle
 import kotlin.math.abs
 
 fun median(ns: List<Int>): Int {
+    val half = ns.size / 2
     val sorted = ns.sorted()
     return if (ns.size % 2 == 0) {
-        (sorted[ns.size / 2 - 1] + sorted[ns.size / 2]) / 2
+        (sorted[half - 1] + sorted[half]) / 2
     } else {
-        sorted[ns.size / 2]
+        sorted[half]
     }
 }
 
