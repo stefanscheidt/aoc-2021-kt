@@ -1,7 +1,6 @@
 package day07
 
 import io.kotest.matchers.shouldBe
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class Day07Tests {
@@ -19,11 +18,10 @@ class Day07Tests {
     }
 
     @Test
-    @Disabled
     fun `solve second puzzle with sample`() {
         val input = sample.lineSequence()
 
-        solvePuzzle2(input) shouldBe 0L
+        solvePuzzle2(input) shouldBe 168L
     }
 
     private val sample = """
