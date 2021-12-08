@@ -16,7 +16,7 @@ class Day08Tests {
     fun `solve second puzzle with sample`() {
         val input = sample.lineSequence()
 
-        solvePuzzle2(input) shouldBe 0L
+        solvePuzzle2(input) shouldBe 61229L
     }
 
     private val sample = """
