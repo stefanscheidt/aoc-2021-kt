@@ -1,34 +1,30 @@
-package day01
+package day02
 
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
-class Day01Tests {
+class Day02Tests {
 
     @Test
     internal fun `solve first puzzle for sample`() {
         val input = sample.lineSequence()
 
-        solveFirstPuzzle(input) shouldBe 7L
+        solveFirstPuzzle(input) shouldBe 150L
     }
 
     @Test
     internal fun `solve second puzzle for sample`() {
         val input = sample.lineSequence()
 
-        solveSecondPuzzle(input) shouldBe 5L
+        solveSecondPuzzle(input) shouldBe -1L
     }
 
     val sample = """
-            199
-            200
-            208
-            210
-            200
-            207
-            240
-            269
-            260
-            263
+        forward 5
+        down 5
+        forward 8
+        up 3
+        down 8
+        forward 2
     """.trimIndent()
 }

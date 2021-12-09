@@ -1,7 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.6.0"
-    id("com.github.ben-manes.versions") version "0.39.0"
-    id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
+    kotlin("jvm") version "1.5.31"
 }
 
 java {
@@ -18,23 +16,16 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-tasks.check {
-    dependsOn("ktlintCheck")
-}
-
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    val junitVersion = "5.8.1"
-
-    @Suppress("GradlePackageUpdate")
-    implementation("commons-codec:commons-codec:1.15")
+    val junitVersion = "5.8.2"
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-    testImplementation("io.kotest:kotest-assertions-core:4.6.3")
+    testImplementation("io.kotest:kotest-assertions-core:5.0.1")
 }
