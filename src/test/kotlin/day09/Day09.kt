@@ -16,7 +16,7 @@ fun Heightmap.getOrNull(p: Point): Int? =
     this.getOrNull(p.y)?.getOrNull(p.x)
 
 private fun Heightmap.points(): Set<Point> =
-    indices.flatMap { y -> this[0].indices.map { x -> Point(x, y) } }.toSet()
+    indices.flatMap { y -> this[y].indices.map { x -> Point(x, y) } }.toSet()
 
 fun Heightmap.neighbourValues(p: Point): Set<Int> {
     return p.neighbours().mapNotNull(::getOrNull).toSet()
