@@ -30,7 +30,7 @@ fun parseCaveMap(input: List<String>): CaveMap =
 
 fun solvePuzzle1(input: Sequence<String>): Long =
     parseCaveMap(input.toList())
-        .traverse(canVisit = { cave, path -> cave !in path || cave.isBig })
+        .traverse(canVisit = { cave, path -> cave.isBig || cave !in path })
         .size.toLong()
 
 fun solvePuzzle2(input: Sequence<String>): Long {
