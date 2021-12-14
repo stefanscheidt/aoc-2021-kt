@@ -58,9 +58,8 @@ fun solvePuzzle1(input: Sequence<String>): Long =
 
 fun solvePuzzle2(input: Sequence<String>): Long {
     return parseGrid(input.toList()).evolution()
-        .mapIndexed { index, (grid, _) -> Pair(index, grid) }
-        .first { (_, grid) -> grid.values.all { it == 0 } }
-        .first.toLong()
+        .indexOfFirst { (grid, _) -> grid.values.all { it == 0 } }
+        .toLong()
 }
 
 fun main() {
