@@ -4,20 +4,19 @@ import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 import utils.solvePuzzle
 
-fun solveFirstPuzzle(input: Sequence<String>): Long =
-    input.map(String::toLong)
+fun solvePuzzle1(input: Sequence<String>): Int =
+    input.map(String::toInt)
         .increases()
 
-fun solveSecondPuzzle(input: Sequence<String>): Long =
-    input.map(String::toLong)
+fun solvePuzzle2(input: Sequence<String>): Int =
+    input.map(String::toInt)
         .windowed(3)
         .map { it.sum() }
         .increases()
 
-private fun Sequence<Long>.increases(): Long =
+private fun Sequence<Int>.increases(): Int =
     zipWithNext()
         .count { it.first < it.second }
-        .toLong()
 
 class Day01Tests {
 
@@ -25,24 +24,24 @@ class Day01Tests {
     internal fun `solve first puzzle for sample`() {
         val input = sample.lineSequence()
 
-        solveFirstPuzzle(input) shouldBe 7L
+        solvePuzzle1(input) shouldBe 7
     }
 
     @Test
     internal fun `solve first puzzle`() {
-        solvePuzzle(1, ::solveFirstPuzzle) shouldBe 1529L
+        solvePuzzle(1, ::solvePuzzle1) shouldBe 1529
     }
 
     @Test
     internal fun `solve second puzzle for sample`() {
         val input = sample.lineSequence()
 
-        solveSecondPuzzle(input) shouldBe 5L
+        solvePuzzle2(input) shouldBe 5
     }
 
     @Test
     internal fun `solve second puzzle`() {
-        solvePuzzle(1) { solveSecondPuzzle(it) } shouldBe 1567L
+        solvePuzzle(1) { solvePuzzle2(it) } shouldBe 1567
     }
 }
 

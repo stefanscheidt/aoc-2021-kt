@@ -17,10 +17,9 @@ fun parseNotes(s: String): Note {
 
 // Part 1
 
-fun solvePuzzle1(input: Sequence<String>): Long =
+fun solvePuzzle1(input: Sequence<String>): Int =
     input.map(::parseNotes)
         .sumOf { (_, digits) -> digits.count { it.size in setOf(2, 3, 4, 7) } }
-        .toLong()
 
 // Part 2
 
@@ -63,14 +62,14 @@ fun valueOf(patterns: List<Pattern>): Map<Pattern, Int> {
     return patternFor.entries.associate { (k, v) -> v to k }
 }
 
-fun solvePuzzle2(input: Sequence<String>): Long {
+fun solvePuzzle2(input: Sequence<String>): Int {
     operator fun Map<Pattern, Int>.invoke(pattern: Pattern?): Int =
         getValue(pattern!!)
 
     return input.map(::parseNotes).sumOf { (patterns, digits) ->
         val valueOf = valueOf(patterns)
         valueOf(digits[3]) + 10 * valueOf(digits[2]) + 100 * valueOf(digits[1]) + 1000 * valueOf(digits[0])
-    }.toLong()
+    }
 }
 
 fun main() {

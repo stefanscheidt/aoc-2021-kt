@@ -38,18 +38,18 @@ fun toSeg(s: String, seg: (Pos, Pos) -> List<Pos>): List<Pos> {
     return seg(positions[0], positions[1])
 }
 
-fun solve(input: Sequence<String>, seg: (Pos, Pos) -> List<Pos>): Long {
+fun solve(input: Sequence<String>, seg: (Pos, Pos) -> List<Pos>): Int {
     val map = mutableMapOf<Pos, Int>()
     input.map { row -> toSeg(row, seg) }.forEach { segment ->
         segment.forEach { pos -> map.compute(pos) { _, c -> (c ?: 0) + 1 } }
     }
-    return map.count { it.value > 1 }.toLong()
+    return map.count { it.value > 1 }
 }
 
-fun solvePuzzle1(input: Sequence<String>): Long =
+fun solvePuzzle1(input: Sequence<String>): Int =
     solve(input, ::seg1)
 
-fun solvePuzzle2(input: Sequence<String>): Long =
+fun solvePuzzle2(input: Sequence<String>): Int =
     solve(input, ::seg2)
 
 fun main() {

@@ -35,15 +35,14 @@ fun Heightmap.basinOf(p: Point): Set<Point> {
 fun parseHeightmap(input: List<String>): Heightmap =
     input.map { it.map(Char::digitToInt) }
 
-fun solvePuzzle1(input: Sequence<String>): Long {
+fun solvePuzzle1(input: Sequence<String>): Int {
     val map = parseHeightmap(input.toList())
     return map.points()
         .filter { p -> map.isLowPoint(p) }
         .sumOf { p -> 1 + map[p] }
-        .toLong()
 }
 
-fun solvePuzzle2(input: Sequence<String>): Long {
+fun solvePuzzle2(input: Sequence<String>): Int {
     val map = parseHeightmap(input.toList())
     @Suppress("ConvertCallChainIntoSequence")
     return map.points()
@@ -52,7 +51,6 @@ fun solvePuzzle2(input: Sequence<String>): Long {
         .sortedByDescending { it.size }
         .take(3)
         .fold(1) { acc, points -> acc * points.size }
-        .toLong()
 }
 
 fun main() {

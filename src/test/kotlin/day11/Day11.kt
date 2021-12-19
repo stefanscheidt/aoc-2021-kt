@@ -53,14 +53,13 @@ fun parseGrid(input: List<String>): Grid =
         }
     }.toMap()
 
-fun solvePuzzle1(input: Sequence<String>): Long =
-    parseGrid(input.toList()).evolution().drop(100).first().second.toLong()
+fun solvePuzzle1(input: Sequence<String>): Int =
+    parseGrid(input.toList()).evolution().drop(100).first().second
 
-fun solvePuzzle2(input: Sequence<String>): Long {
-    return parseGrid(input.toList()).evolution()
-        .indexOfFirst { (grid, _) -> grid.values.all { it == 0 } }
-        .toLong()
-}
+fun solvePuzzle2(input: Sequence<String>): Int =
+    parseGrid(input.toList()).evolution().indexOfFirst { (grid, _) ->
+        grid.values.all { it == 0 }
+    }
 
 fun main() {
     println("Answer 1: ${solvePuzzle(11, ::solvePuzzle1)}")

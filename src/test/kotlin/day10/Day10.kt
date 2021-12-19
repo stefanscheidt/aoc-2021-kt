@@ -48,17 +48,16 @@ fun Stack<Char>.completion(): List<Char> {
     return completion.filterNotNull()
 }
 
-fun solvePuzzle1(input: Sequence<String>): Long =
+fun solvePuzzle1(input: Sequence<String>): Int =
     input.map(::parseLine)
         .mapNotNull { result -> (result as? Corrupted)?.char }
         .sumOf { char -> char.corruptionScore }
-        .toLong()
 
-fun solvePuzzle2(input: Sequence<String>): Long {
+fun solvePuzzle2(input: Sequence<String>): Int {
     val scores = input.map(::parseLine)
         .mapNotNull { result -> result as? Incomplete }
         .map { incomplete -> incomplete.stack.completion() }
-        .map { parens -> parens.fold(0L) { acc, char -> acc * 5L + char.completionScore.toLong() } }
+        .map { parens -> parens.fold(0) { acc, char -> acc * 5 + char.completionScore } }
         .sorted()
         .toList()
     return scores.drop(scores.size / 2).first()

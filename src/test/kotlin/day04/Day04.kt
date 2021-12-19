@@ -62,7 +62,7 @@ private fun numbers(input: List<String>): List<Int> =
 private fun cards(input: List<String>): List<BingoCard> =
     input.drop(1).chunked(6).map(::bingoCardOf)
 
-fun solvePuzzle1(input: Sequence<String>): Long {
+fun solvePuzzle1(input: Sequence<String>): Int {
     val inputList = input.toList()
     val ns = numbers(inputList)
     var cards = cards(inputList)
@@ -70,13 +70,13 @@ fun solvePuzzle1(input: Sequence<String>): Long {
     ns.forEach { n ->
         cards = cards.map { it.mark(n) }
         val winner = cards.find(BingoCard::solved)
-        if (winner != null) return winner.score(n).toLong()
+        if (winner != null) return winner.score(n)
     }
 
-    return 0L
+    return 0
 }
 
-fun solvePuzzle2(input: Sequence<String>): Long {
+fun solvePuzzle2(input: Sequence<String>): Int {
     val inputList = input.toList()
     val ns = numbers(inputList)
     var cards = cards(inputList)
@@ -89,5 +89,5 @@ fun solvePuzzle2(input: Sequence<String>): Long {
     }
 
     val lastWinner = winners.last()
-    return lastWinner.first.score(lastWinner.second).toLong()
+    return lastWinner.first.score(lastWinner.second)
 }

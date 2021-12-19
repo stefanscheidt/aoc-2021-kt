@@ -9,14 +9,14 @@ class Day05Tests {
     fun `solve first puzzle with sample`() {
         val input = sample.lineSequence()
 
-        solvePuzzle1(input) shouldBe 5L
+        solvePuzzle1(input) shouldBe 5
     }
 
     @Test
     fun `solve second puzzle with sample`() {
         val input = sample.lineSequence()
 
-        solvePuzzle2(input) shouldBe 12L
+        solvePuzzle2(input) shouldBe 12
     }
 
     private val sample = """

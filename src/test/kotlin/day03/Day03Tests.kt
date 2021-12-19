@@ -11,13 +11,13 @@ private fun Sequence<String>.toWords(): List<Word> =
 
 // part 1
 
-fun solvePuzzle1(input: Sequence<String>): Long {
+fun solvePuzzle1(input: Sequence<String>): Int {
     val words = input.toWords()
     val zeros = List(words.size) { 0 }
     val counts = words.fold(zeros) { acc, word -> acc.zip(word).map(::sum) }
     val gamma = counts.rate { it >= words.size / 2.0 }
     val epsilon = counts.rate { it < words.size / 2.0 }
-    return (gamma * epsilon).toLong()
+    return gamma * epsilon
 }
 
 private fun List<Int>.rate(p: (Int) -> Boolean): Int =
@@ -53,11 +53,11 @@ internal fun rating(words: List<Word>, criteria: BitCriteria): Int {
 val mostCommon: BitCriteria = { words, count -> count >= words.size / 2.0 }
 val leastCommon: BitCriteria = { words, count -> count < words.size / 2.0 }
 
-fun solvePuzzle2(input: Sequence<String>): Long {
+fun solvePuzzle2(input: Sequence<String>): Int {
     val words = input.toWords()
     val ogr = rating(words, mostCommon)
     val csr = rating(words, leastCommon)
-    return (ogr * csr).toLong()
+    return (ogr * csr)
 }
 
 class Day03Tests {
@@ -83,12 +83,12 @@ class Day03Tests {
     fun `solve first puzzle with sample`() {
         val input = sample.lineSequence()
 
-        solvePuzzle1(input) shouldBe 198L
+        solvePuzzle1(input) shouldBe 198
     }
 
     @Test
     fun `solve first puzzle`() {
-        solvePuzzle(3, ::solvePuzzle1) shouldBe 741950L
+        solvePuzzle(3, ::solvePuzzle1) shouldBe 741950
     }
 
     // part 2
@@ -138,19 +138,19 @@ class Day03Tests {
     internal fun `rate words`() {
         val words = sample.lineSequence().toWords()
 
-        rating(words, mostCommon) shouldBe 23L
-        rating(words, leastCommon) shouldBe 10L
+        rating(words, mostCommon) shouldBe 23
+        rating(words, leastCommon) shouldBe 10
     }
 
     @Test
     fun `solve second puzzle with sample`() {
         val input = sample.lineSequence()
 
-        solvePuzzle2(input) shouldBe 230L
+        solvePuzzle2(input) shouldBe 230
     }
 
     @Test
     fun `solve second puzzle`() {
-        solvePuzzle(3, ::solvePuzzle2) shouldBe 903810L
+        solvePuzzle(3, ::solvePuzzle2) shouldBe 903810
     }
 }

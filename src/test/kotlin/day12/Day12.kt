@@ -28,12 +28,12 @@ fun parseCaveMap(input: List<String>): CaveMap =
         }.groupBy({ it.first }, { it.second })
         .mapValues { (_, caves) -> caves.toSet() }
 
-fun solvePuzzle1(input: Sequence<String>): Long =
+fun solvePuzzle1(input: Sequence<String>): Int =
     parseCaveMap(input.toList())
         .traverse(canVisit = { cave, path -> cave.isBig || cave !in path })
-        .size.toLong()
+        .size
 
-fun solvePuzzle2(input: Sequence<String>): Long {
+fun solvePuzzle2(input: Sequence<String>): Int {
     fun noSmallCaveVisitedTwice(path: Path /* = kotlin.collections.List<day12.Cave /* = kotlin.String */> */): Boolean =
         path.filterNot { it.isBig }.groupBy { it }.none { (_, visits) -> visits.size == 2 }
 
@@ -47,7 +47,7 @@ fun solvePuzzle2(input: Sequence<String>): Long {
 
     return parseCaveMap(input.toList())
         .traverse(canVisit = ::canVisit)
-        .size.toLong()
+        .size
 }
 
 fun main() {

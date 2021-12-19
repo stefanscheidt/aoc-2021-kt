@@ -38,15 +38,15 @@ fun applyMove2(pos: Position, move: Move): Position =
         is Down -> pos.copy(aim = pos.aim + move.units)
     }
 
-fun solvePuzzle1(input: Sequence<String>): Long =
+fun solvePuzzle1(input: Sequence<String>): Int =
     solve(input, ::applyMove1)
 
-fun solvePuzzle2(input: Sequence<String>): Long =
+fun solvePuzzle2(input: Sequence<String>): Int =
     solve(input, ::applyMove2)
 
-private fun solve(input: Sequence<String>, f: (Position, Move) -> Position): Long {
+private fun solve(input: Sequence<String>, f: (Position, Move) -> Position): Int {
     val finalPosition = input.map(String::parseMove).fold(Position(0, 0, 0), f)
-    return (finalPosition.horizontal * finalPosition.depth).toLong()
+    return (finalPosition.horizontal * finalPosition.depth)
 }
 
 class Day02Tests {
@@ -71,23 +71,23 @@ class Day02Tests {
     fun `solve first puzzle with sample`() {
         val input = sample.lineSequence()
 
-        solvePuzzle1(input) shouldBe 150L
+        solvePuzzle1(input) shouldBe 150
     }
 
     @Test
     fun `solve first puzzle`() {
-        solvePuzzle(2, ::solvePuzzle1) shouldBe 1561344L
+        solvePuzzle(2, ::solvePuzzle1) shouldBe 1561344
     }
 
     @Test
     fun `solve second puzzle with sample`() {
         val input = sample.lineSequence()
 
-        solvePuzzle2(input) shouldBe 900L
+        solvePuzzle2(input) shouldBe 900
     }
 
     @Test
     fun `solve second puzzle`() {
-        solvePuzzle(2, ::solvePuzzle2) shouldBe 1848454425L
+        solvePuzzle(2, ::solvePuzzle2) shouldBe 1848454425
     }
 }

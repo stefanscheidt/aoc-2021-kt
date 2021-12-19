@@ -13,24 +13,22 @@ fun median(ns: List<Int>): Int {
     }
 }
 
-fun solvePuzzle1(input: Sequence<String>): Long {
+fun solvePuzzle1(input: Sequence<String>): Int {
     val ints = input.first().split(",").map(String::toInt)
     val median = median(ints)
-    val fuel = ints.sumOf { abs(it - median) }
-    return fuel.toLong()
+    return ints.sumOf { abs(it - median) }
 }
 
 fun sumOfFuel(from: List<Int>, to: Int): Int =
     from.map { abs(it - to) }.sumOf { it * (it + 1) / 2 }
 
-fun solvePuzzle2(input: Sequence<String>): Long {
+fun solvePuzzle2(input: Sequence<String>): Int {
     val ints = input.first().split(",").map(String::toInt)
     // val average = ints.average().roundToInt()
     // val fuel = ints.map { abs(it - average) }.sumOf { it * (it + 1) / 2 }
     val min = ints.minOrNull() ?: 0
     val max = ints.maxOrNull() ?: 0
-    val fuel = (min..max).minOfOrNull { sumOfFuel(ints, it) } ?: 0
-    return fuel.toLong()
+    return (min..max).minOfOrNull { sumOfFuel(ints, it) } ?: 0
 }
 
 fun main() {
