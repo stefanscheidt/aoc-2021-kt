@@ -43,17 +43,19 @@ fun solvePuzzle1(input: Sequence<String>): Int {
 
 // part 2, would also solve part 1
 
-typealias ElementPair = Pair<Char, Char>
+typealias Element = Char
 
-typealias ElementInsertionRules = Map<ElementPair, Char>
+typealias ElementPair = Pair<Element, Element>
 
-typealias ElementFrequencies = Map<ElementPair, Long>
+typealias ElementInsertionRules = Map<ElementPair, Element>
+
+typealias ElementPairFrequencies = Map<ElementPair, Long>
 
 fun <T> MutableMap<T, Long>.increment(key: T, amount: Long) {
     put(key, getOrDefault(key, 0L) + amount)
 }
 
-fun ElementFrequencies.updateWith(rules: ElementInsertionRules /* = kotlin.collections.Map<kotlin.String, kotlin.Char> */): ElementFrequencies {
+fun ElementPairFrequencies.updateWith(rules: ElementInsertionRules /* = kotlin.collections.Map<kotlin.String, kotlin.Char> */): ElementPairFrequencies {
     val next = mutableMapOf<ElementPair, Long>()
     forEach { (pair, count) ->
         val element = rules[pair]
@@ -67,21 +69,21 @@ fun ElementFrequencies.updateWith(rules: ElementInsertionRules /* = kotlin.colle
     return next
 }
 
-fun ElementFrequencies.charFrequencies(last: Char): Map<Char, Long> =
+fun ElementPairFrequencies.elementFrequencies(extraElement: Element): Map<Element, Long> =
     map { (pair, count) -> pair.first to count }
-        .groupBy({ (char, _) -> char }, { (_, count) -> count })
-        .mapValues { (char, counts) -> if (char == last) counts.sum() + 1L else counts.sum() }
+        .groupBy({ (element, _) -> element }, { (_, count) -> count })
+        .mapValues { (element, counts) -> if (element == extraElement) counts.sum() + 1L else counts.sum() }
 
 fun elementPair(pair: String): ElementPair =
     Pair(pair[0], pair[1])
 
 data class InputData(
-    val frequencies: ElementFrequencies,
+    val frequencies: ElementPairFrequencies,
     val rules: ElementInsertionRules, /* = kotlin.collections.Map<day14.ElementPair /* = kotlin.Pair<kotlin.Char, kotlin.Char> */, kotlin.Char> */
-    val lastChar: Char,
+    val lastTemplateElement: Element,
 )
 
-fun parseFrequencies(input: String): ElementFrequencies {
+fun parseFrequencies(input: String): ElementPairFrequencies {
     val frequencies = mutableMapOf<ElementPair, Long>()
     input.windowed(2).forEach {
         frequencies.increment(ElementPair(it[0], it[1]), 1L)
@@ -101,17 +103,17 @@ fun parseInput2(input: List<String>): InputData {
     return InputData(
         frequencies = parseFrequencies(template),
         rules = parseRules(rules),
-        lastChar = template.last()
+        lastTemplateElement = template.last()
     )
 }
 
-fun ElementInsertionRules.computeFrequencies(seed: ElementFrequencies, iterations: Int) =
+fun ElementInsertionRules.elementPairFrequencies(seed: ElementPairFrequencies, iterations: Int) =
     generateSequence(seed) { it.updateWith(this) }.take(iterations + 1).last()
 
 fun solvePuzzle2(input: Sequence<String>): Long {
-    val (seed, rules, lastChar) = parseInput2(input.toList())
-    val occurrences = rules.computeFrequencies(seed, 40)
-        .charFrequencies(lastChar)
+    val (seed, rules, lastTemplateElement) = parseInput2(input.toList())
+    val occurrences = rules.elementPairFrequencies(seed, 40)
+        .elementFrequencies(lastTemplateElement)
         .values
     val max = occurrences.maxOrNull() ?: 0L
     val min = occurrences.minOrNull() ?: 0L
