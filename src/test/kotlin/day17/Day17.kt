@@ -5,7 +5,13 @@ import kotlin.math.sign
 
 data class Point(val x: Int, val y: Int)
 
+fun P(x: Int, y: Int): Point =
+    Point(x, y)
+
 typealias Vector = Point
+
+fun v(x: Int, y: Int): Vector =
+    Vector(x, y)
 
 operator fun Point.plus(v: Vector /* = day17.Point */): Point =
     copy(x = x + v.x, y = y + v.y)
@@ -23,7 +29,7 @@ fun Point.trace(vector: Vector, targetArea: Area): Sequence<Point> =
         if ((p + v).missed(targetArea)) {
             null
         } else {
-            val dv = Vector((-1) * v.x.sign, -1)
+            val dv = v((-1) * v.x.sign, -1)
             Pair(p + v, v + dv)
         }
     }.map { it.first }
@@ -48,18 +54,18 @@ fun solvePuzzle1(input: Sequence<String>): Int {
 }
 
 fun solvePuzzle2(input: Sequence<String>): Int {
-    val origin = Point(0, 0)
+    val origin = P(0, 0)
     val targetArea = parseTargetArea(input.first())
 
-    val minX = 0
-    val maxX = targetArea.xRange.last
+    val minVx = 0
+    val maxVx = targetArea.xRange.last
 
-    val minY = targetArea.yRange.first
-    val maxY = (-1) * minY
+    val minVy = targetArea.yRange.first
+    val maxVy = minVy * (minVy + 1) / 2
 
-    return (minX..maxX).sumOf { x ->
-        (minY..maxY).count { y ->
-            origin.trace(Vector(x, y), targetArea).last() in targetArea
+    return (minVx..maxVx).sumOf { x ->
+        (minVy..maxVy).count { y ->
+            origin.trace(v(x, y), targetArea).last() in targetArea
         }
     }
 }

@@ -16,8 +16,8 @@ class Day17Tests {
     internal fun `point in area`() {
         val area = parseTargetArea("target area: x=20..30, y=-10..-5")
 
-        (Point(0, 0) in area) shouldBe false
-        (Point(20, -10) in area) shouldBe true
+        (P(0, 0) in area) shouldBe false
+        (P(20, -10) in area) shouldBe true
     }
 
     @Test
