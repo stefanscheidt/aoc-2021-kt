@@ -92,7 +92,7 @@ class Day18Tests {
     fun `solve second puzzle with sample`() {
         val input = sample.lineSequence()
 
-        solvePuzzle2(input) shouldBe 0
+        solvePuzzle2(input) shouldBe 3993
     }
 
     private val sample = """

@@ -75,7 +75,7 @@ fun SnailfishNumber.reduce(): SnailfishNumber =
     }
         .zipWithNext()
         .takeWhile { it.first != it.second }
-        .last().second
+        .lastOrNull()?.second ?: this
 
 infix operator fun SnailfishNumber.plus(other: SnailfishNumber): SnailfishNumber =
     SnailfishNumber("[$value,${other.value}]").reduce()
@@ -84,10 +84,20 @@ fun List<SnailfishNumber>.sum(): SnailfishNumber =
     reduce { acc, sfn -> acc + sfn }
 
 fun solvePuzzle1(input: Sequence<String>): Int =
-    input.map(::sfn).toList().sum().magnitude
+    input.toList().map(::sfn).sum().magnitude
 
-fun solvePuzzle2(input: Sequence<String>): Int =
-    -1
+fun solvePuzzle2(input: Sequence<String>): Int {
+    val numbers = input.toList().map(::sfn)
+    return sequence {
+        numbers.forEach { m ->
+            numbers.forEach { n ->
+                yield(m to n)
+            }
+        }
+    }
+        .filter { (m, n) -> m != n }
+        .maxOf { (m, n) -> (m + n).magnitude }
+}
 
 fun main() {
     println("Answer 1: ${solvePuzzle(18, ::solvePuzzle1)}")
