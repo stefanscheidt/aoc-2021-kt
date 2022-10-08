@@ -1,21 +1,24 @@
 plugins {
-    kotlin("jvm") version "1.6.10"
-    id("com.github.ben-manes.versions") version "0.39.0"
-    id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
+    kotlin("jvm") version "1.7.20"
+    id("com.github.ben-manes.versions") version "0.42.0"
+    id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
 }
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(11))
+        languageVersion.set(JavaLanguageVersion.of(17))
     }
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions.jvmTarget = "11"
+    kotlinOptions.jvmTarget = "17"
 }
 
-tasks.withType<Test> {
+tasks.test {
     useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
 }
 
 tasks.check {
