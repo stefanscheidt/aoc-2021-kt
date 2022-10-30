@@ -12,10 +12,6 @@ and store it in an env var `AOC_SESSION`. Then `cd` into `./input` and run `./ge
 ## Code Formatting
 
 Code format is checked by [ktlint](https://ktlint.github.io/)
-via the Gradle plugin [Ktlint Gradle](https://github.com/jlleitschuh/ktlint-gradle)
+via the [Spotless plugin for Gradle](https://github.com/diffplug/spotless/tree/main/plugin-gradle#ktlint)
 
-Format the code using `./gradlew ktlintFormat`.
-
-Adjust IDEA code style settings via `./gradlew ktlintApplyToIdea` and restart IDEA.
-
-Add a Git pre-commit hook checking the format via `./gradlew addKtlintCheckGitPreCommitHook`.
+Format the code using `./gradlew spotlessApply`.
