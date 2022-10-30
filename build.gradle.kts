@@ -1,7 +1,6 @@
 plugins {
     kotlin("jvm") version "1.7.20"
-    id("com.github.ben-manes.versions") version "0.42.0"
-    id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
+    id("com.diffplug.spotless") version "6.11.0"
 }
 
 java {
@@ -22,7 +21,17 @@ tasks.test {
 }
 
 tasks.check {
-    dependsOn("ktlintCheck")
+    dependsOn("spotlessCheck")
+}
+
+spotless {
+    kotlin {
+        ktlint("0.47.1")
+            .editorConfigOverride(mapOf(
+                "ij_kotlin_allow_trailing_comma_on_call_site" to true,
+                "ij_kotlin_allow_trailing_comma" to true,
+            ))
+    }
 }
 
 repositories {
@@ -30,13 +39,11 @@ repositories {
 }
 
 dependencies {
-    val junitVersion = "5.8.2"
-
-    testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
+    testImplementation(platform("org.junit:junit-bom:5.9.1"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-    testImplementation("io.kotest:kotest-assertions-core:5.0.1")
+    testImplementation("io.kotest:kotest-assertions-core:5.5.3")
 
     testImplementation(kotlin("script-runtime"))
 }

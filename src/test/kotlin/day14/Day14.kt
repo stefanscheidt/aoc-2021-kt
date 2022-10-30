@@ -103,7 +103,7 @@ fun parseInput2(input: List<String>): InputData {
     return InputData(
         frequencies = parseFrequencies(template),
         rules = parseRules(rules),
-        lastTemplateElement = template.last()
+        lastTemplateElement = template.last(),
     )
 }
 

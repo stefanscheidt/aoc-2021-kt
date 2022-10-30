@@ -29,7 +29,7 @@ class Day13Tests {
 
         parseOrigami(input) shouldBe Pair(
             setOf(Point(6, 10), Point(0, 14)),
-            listOf(Up(7), Left(5))
+            listOf(Up(7), Left(5)),
         )
     }
 

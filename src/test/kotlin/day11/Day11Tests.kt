@@ -14,7 +14,7 @@ class Day11Tests {
             19191
             19991
             11111            
-            """.trimIndent().lines()
+            """.trimIndent().lines(),
         )
 
         var tick = grid.tick()

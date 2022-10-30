@@ -55,10 +55,13 @@ fun solvePuzzle2(input: Sequence<String>): Int {
     val height = cave.size
     val destination = Point(width * 5 - 1, height * 5 - 1)
     return traverse(destination) { p ->
-        if (p.x > destination.x || p.y > destination.y) null
-        else cave.getOrNull(p.y % height)
-            ?.getOrNull(p.x % width)
-            ?.let { topLeftRisk -> (topLeftRisk + p.x / width + p.y / height - 1) % 9 + 1 }
+        if (p.x > destination.x || p.y > destination.y) {
+            null
+        } else {
+            cave.getOrNull(p.y % height)
+                ?.getOrNull(p.x % width)
+                ?.let { topLeftRisk -> (topLeftRisk + p.x / width + p.y / height - 1) % 9 + 1 }
+        }
     }
 }
 

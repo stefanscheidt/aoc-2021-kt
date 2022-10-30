@@ -15,24 +15,18 @@ class Day09Tests {
         val map = listOf(
             listOf(11, 12, 13),
             listOf(21, 22, 23),
-            listOf(31, 32, 33)
+            listOf(31, 32, 33),
         )
-        map.neighbourValues(Point(0, 0)) shouldBe setOf(
-            11, 12, 21,
-        )
-        map.neighbourValues(Point(1, 0)) shouldBe setOf(
-            11, 12, 13, 22
-        )
-        map.neighbourValues(Point(1, 1)) shouldBe setOf(
-            12, 21, 22, 23, 32
-        )
+        map.neighbourValues(Point(0, 0)) shouldBe setOf(11, 12, 21)
+        map.neighbourValues(Point(1, 0)) shouldBe setOf(11, 12, 13, 22)
+        map.neighbourValues(Point(1, 1)) shouldBe setOf(12, 21, 22, 23, 32)
     }
 
     @Test
     internal fun `test low point`() {
         val map = listOf(
             listOf(2, 1, 9),
-            listOf(3, 9, 8)
+            listOf(3, 9, 8),
         )
         map.isLowPoint(Point(0, 0)) shouldBe false
         map.isLowPoint(Point(1, 0)) shouldBe true

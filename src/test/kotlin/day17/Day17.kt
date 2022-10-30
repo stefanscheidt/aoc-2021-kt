@@ -43,7 +43,7 @@ fun parseTargetArea(input: String): Area {
     val ranges = input.substringAfter("target area: ").split(", ")
     return Area(
         toIntRange(ranges[0].substringAfter("x=")),
-        toIntRange(ranges[1].substringAfter("y="))
+        toIntRange(ranges[1].substringAfter("y=")),
     )
 }
 

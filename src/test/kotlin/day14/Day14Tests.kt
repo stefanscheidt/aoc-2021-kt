@@ -31,7 +31,10 @@ class Day14Tests {
 
         // NCNBCHB
         next.elementFrequencies('B') shouldBe mapOf(
-            'N' to 2, 'C' to 2, 'B' to 2, 'H' to 1
+            'N' to 2,
+            'C' to 2,
+            'B' to 2,
+            'H' to 1,
         )
     }
 

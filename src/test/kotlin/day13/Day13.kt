@@ -81,7 +81,7 @@ fun printPaper(paper: Paper) {
             (0..maxX).joinToString("") { x ->
                 if (paper.contains(Point(x, y))) "#" else "."
             }
-        }
+        },
     )
 }
 

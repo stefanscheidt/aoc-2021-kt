@@ -6,9 +6,14 @@ data class Point(val x: Int, val y: Int)
 
 val Point.neighbours: Set<Point>
     get() = setOf(
-        copy(x = x - 1, y = y - 1), copy(y = y - 1), copy(x = x + 1, y = y - 1),
-        copy(x = x - 1), copy(x = x + 1),
-        copy(x = x - 1, y = y + 1), copy(y = y + 1), copy(x = x + 1, y = y + 1),
+        copy(x = x - 1, y = y - 1),
+        copy(y = y - 1),
+        copy(x = x + 1, y = y - 1),
+        copy(x = x - 1),
+        copy(x = x + 1),
+        copy(x = x - 1, y = y + 1),
+        copy(y = y + 1),
+        copy(x = x + 1, y = y + 1),
     )
 
 typealias Grid = Map<Point, Int>
@@ -21,7 +26,7 @@ fun Int.flashes(): Boolean =
 
 tailrec fun Grid.increaseEnergy(
     ps: Map<Point, Int> = points.associateWith { 1 },
-    flashing: Set<Point> = emptySet()
+    flashing: Set<Point> = emptySet(),
 ): Pair<Grid, Set<Point>> =
     if (ps.isEmpty()) {
         Pair(this, emptySet())
@@ -36,7 +41,7 @@ fun Grid.tick(): Pair<Grid, Int> {
     val increasedGrid = increaseEnergy().first
     return Pair(
         increasedGrid.mapValues { (_, e) -> if (e.flashes()) 0 else e },
-        increasedGrid.count { (_, e) -> e.flashes() }
+        increasedGrid.count { (_, e) -> e.flashes() },
     )
 }
 

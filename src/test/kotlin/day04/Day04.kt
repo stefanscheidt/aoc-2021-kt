@@ -16,7 +16,7 @@ fun Card.find(n: Int): Position? {
 
 data class BingoCard(
     val card: Card,
-    internal val marked: Set<Position> = emptySet()
+    internal val marked: Set<Position> = emptySet(),
 ) {
 
     val solved: Boolean

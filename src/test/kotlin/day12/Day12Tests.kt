@@ -24,7 +24,7 @@ class Day12Tests {
             "b" to setOf("start", "A", "d", "end"),
             "c" to setOf("A"),
             "d" to setOf("b"),
-            "end" to setOf("A", "b")
+            "end" to setOf("A", "b"),
         )
     }
 

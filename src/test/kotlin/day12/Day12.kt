@@ -13,11 +13,14 @@ typealias CaveMap = Map<Cave, Set<Cave>>
 typealias Path = List<Cave>
 
 fun CaveMap.traverse(path: Path = listOf("start"), canVisit: (Cave, Path) -> Boolean): Set<Path> =
-    if (path.last() == "end") setOf(path)
-    else getValue(path.last())
-        .filter { cave -> canVisit(cave, path) }
-        .flatMap { cave -> traverse(path + cave, canVisit) }
-        .toSet()
+    if (path.last() == "end") {
+        setOf(path)
+    } else {
+        getValue(path.last())
+            .filter { cave -> canVisit(cave, path) }
+            .flatMap { cave -> traverse(path + cave, canVisit) }
+            .toSet()
+    }
 
 fun parseCaveMap(input: List<String>): CaveMap =
     input.map { it.split("-") }

@@ -24,7 +24,6 @@ fun solvePuzzle1(input: Sequence<String>): Int =
 // Part 2
 
 fun valueOf(patterns: List<Pattern>): Map<Pattern, Int> {
-
     infix fun Pattern.overlaps(other: Pattern?): Boolean =
         other == null || containsAll(other)
 

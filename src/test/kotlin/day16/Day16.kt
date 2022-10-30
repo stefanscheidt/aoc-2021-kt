@@ -11,13 +11,13 @@ sealed interface Packet {
 
 data class Literal(
     override val version: Int,
-    override val value: Long
+    override val value: Long,
 ) : Packet
 
 data class Operator(
     override val version: Int,
     val type: Int,
-    val packets: List<Packet>
+    val packets: List<Packet>,
 ) : Packet {
     override val value: Long
         get() = when (type) {
