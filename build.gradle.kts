@@ -43,7 +43,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-    testImplementation("io.kotest:kotest-assertions-core:5.5.3")
+    testImplementation("io.kotest:kotest-assertions-core:5.5.4")
 
     testImplementation(kotlin("script-runtime"))
 }
