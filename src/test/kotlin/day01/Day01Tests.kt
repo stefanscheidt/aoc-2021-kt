@@ -21,27 +21,27 @@ private fun Sequence<Int>.increases(): Int =
 class Day01Tests {
 
     @Test
-    internal fun `solve first puzzle for sample`() {
+    fun `solve first puzzle for sample`() {
         val input = sample.lineSequence()
 
         solvePuzzle1(input) shouldBe 7
     }
 
     @Test
-    internal fun `solve first puzzle`() {
-        solvePuzzle(1, ::solvePuzzle1) shouldBe 1529
-    }
-
-    @Test
-    internal fun `solve second puzzle for sample`() {
+    fun `solve second puzzle for sample`() {
         val input = sample.lineSequence()
 
         solvePuzzle2(input) shouldBe 5
     }
 
     @Test
-    internal fun `solve second puzzle`() {
-        solvePuzzle(1) { solvePuzzle2(it) } shouldBe 1567
+    fun `solve first puzzle`() {
+        solvePuzzle(1, ::solvePuzzle1) shouldBe 1529
+    }
+
+    @Test
+    fun `solve second puzzle`() {
+        solvePuzzle(1, ::solvePuzzle2) shouldBe 1567
     }
 }
 
